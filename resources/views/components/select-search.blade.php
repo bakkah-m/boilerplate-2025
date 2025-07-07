@@ -10,12 +10,12 @@
            @focus="open()" 
            @input="filter()" />
 
-    <div class="w-full bg-white overflow-y-scroll max-h-40 absolute z-[9999] border-2 border-t-none" 
+    <div class="w-full bg-base-100 overflow-y-scroll max-h-40 absolute z-[9999] border-2 border-t-none" 
          x-show="show" 
          x-transition>
         <template x-for="(option, index) in filteredOptions" :key="option.id">
-            <p class="text-base p-2 hover:bg-gray-100 cursor-pointer"
-               :class="{ 'bg-gray-100': index === activeIndex }"
+            <p class="text-base p-2 hover:bg-base-200 cursor-pointer"
+               :class="{ 'bg-base-300': index === activeIndex }"
                @click="choose(option)">
                 <span x-text="option.label"></span>
             </p>
