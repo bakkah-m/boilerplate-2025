@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source "../views";
 
@@ -9,11 +9,13 @@
 @plugin "daisyui";
 @plugin "flowbite/plugin";
 
-
 @theme {
-  --font-sans:
-    Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark, cupcake;
 }
 
 /*
@@ -25,11 +27,48 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+
+    /* style.css */
+}
+
+.datatable-input {
+    @apply bg-base-200;
+    @apply text-base-content;
+}
+
+.datatable-sorter {
+    @apply text-base-content;
+}
+
+.datatable-selector {
+    @apply bg-base-200;
+    @apply text-base-content;
+}
+
+.datatable-selector option {
+    @apply text-base-content;
+}
+
+.datatable-table td{
+    @apply text-base-content;
+}
+
+.datatable-info {
+    @apply text-base-content;
+}
+
+.datatable-dropdown label {
+    @apply text-base-content;
+}
+
+.datatable-table thead{
+    @apply bg-base-200;
+    @apply text-base-content;
 }

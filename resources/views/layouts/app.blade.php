@@ -17,7 +17,11 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    @include('layouts.logout')
+    <script>
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+    </script>
+    <div class="min-h-screen bg-base-200">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -26,7 +30,7 @@
             <!-- Page Content -->
             <div class="w-full lg:pl-80">
                 @isset($header)
-                    <header class="bg-white shadow-sm">
+                    <header class="bg-base-100 shadow-sm">
                         <div class="max-w-9xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
