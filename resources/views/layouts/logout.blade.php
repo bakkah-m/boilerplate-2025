@@ -10,7 +10,7 @@
 
             <div class="flex gap-2 justify-end">
 
-                <button class="btn" type="button" onclick="logoutModal.close">Batalkan</button>
+                <button class="btn" type="button" onclick="logoutModal.close()">Batalkan</button>
                 <button class="btn btn-error" type="submit">Logout</button>
             </div>
         </form>

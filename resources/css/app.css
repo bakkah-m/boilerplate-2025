@@ -15,7 +15,7 @@
         "Noto Color Emoji";
 }
 @plugin "daisyui" {
-    themes: light --default, dark --prefersdark, cupcake;
+    themes: light --default, dark --prefersdark, pastel;
 }
 
 /*

@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-base-content leading-tight">
-            {{ __('Akun Pengguna') }}
+            {{ __('Manajemen User') }}
         </h2>
+    </x-slot>
+    <x-slot name="menu">
+        <span class="badge badge-info text-white">Manajemen User</span>
     </x-slot>
 
     <div class="py-4">
@@ -10,12 +13,12 @@
             <div class="bg-base-100 overflow-hidden shadow-xs sm:rounded-lg p-4 space-y-4">
                 <div class="flex justify-end">
                     @include('users.create')
-                    <button class="btn" onclick="createModal.showModal()">+ Tambah Data</button>
+                    <button class="btn btn-primary btn-soft" onclick="createModal.showModal()">+ Tambah Data</button>
                 </div>
 
                 <hr />
 
-                <table id="data-table" class="border">
+                <table id="data-table" class="border table-zebra table">
                     <thead>
                         <th>No</th>
                         <th>Nama</th>
@@ -25,7 +28,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $d)
-                            <tr>
+                            <tr class="hover:bg-base-300!">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->email }}</td>
