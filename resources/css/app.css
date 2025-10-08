@@ -1,4 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/resources/fonts/PlusJakartaSans-Italic.woff2') format('woff2'),
+        url('/resources/fonts/PlusJakartaSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/resources/fonts/PlusJakartaSans-Regular.woff2') format('woff2'),
+        url('/resources/fonts/PlusJakartaSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 @source "../views";
 
@@ -6,14 +25,16 @@
 
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 
-@plugin "daisyui";
 @plugin "flowbite/plugin";
 
 @theme {
-    --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif,
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+    --font-display: "Playfair Display";
+    --color-pr-red: #BD0000;
 }
+
 @plugin "daisyui" {
     themes: light --default, dark --prefersdark, pastel;
 }
@@ -35,8 +56,45 @@
         border-color: var(--color-gray-200, currentcolor);
     }
 
+    :root:has(.modal-open, .modal[open], .modal:target, .modal-toggle:checked) {
+        overflow: hidden !important;
+    }
+
+    :root:not(
+            :has(
+                    .modal-open,
+                    .modal[open],
+                    .modal:target,
+                    .modal-toggle:checked
+                )
+        ) {
+        overflow: scroll !important;
+    }
+
     /* style.css */
+
+    input[type="checkbox"]:checked,
+    input[type="radio"]:checked {
+        background-color: unset !important;
+        border-color: unset !important;
+    }
 }
+
+.menu {
+    --menu-active-bg: var(--color-pr-red);
+    --menu-active-fg: var(--color-white);
+    @apply text-base-content;
+}
+
+.menu li a {
+    @apply hover:bg-pr-red/50;
+}
+
+.input {
+    @apply disabled:text-base-content;
+    @apply text-base-content;
+}
+
 
 .datatable-input {
     @apply bg-base-200;
