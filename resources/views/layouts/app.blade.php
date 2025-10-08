@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" href="https://pprpi.org/asset_home/img/logo.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -31,8 +31,7 @@
             <div class="w-full transition-all duration-200 ease-in-out" id="main-content">
 
                 @isset($header)
-                    <header
-                        class="bg-base-100 shadow-xs px-4 rounded-none lg:rounded-lg lg:px-0 lg:m-4 lg:mb-0 card flex-row justify-between items-center">
+                    <header class="bg-base-100 shadow-xs px-4 rounded-none lg:rounded-lg lg:px-0 lg:m-4 lg:mb-0 card flex-row justify-between items-center">
                         <div class="py-6 sm:px-6 ">
                             {{ $header }}
                         </div>
@@ -54,7 +53,7 @@
             </div>
 
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function() {
                     var value = localStorage.getItem('sidebar');
                     var mainContent = document.getElementById('main-content');
 

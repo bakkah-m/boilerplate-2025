@@ -3,7 +3,7 @@
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var value = localStorage.getItem('sidebar');
             var toggle = document.getElementById('my-drawer-2');
             var mainContent = document.getElementById('main-content');
@@ -12,7 +12,7 @@
                 toggle.checked = true;
             }
 
-            toggle.addEventListener('change', function () {
+            toggle.addEventListener('change', function() {
                 if (toggle.checked) {
                     localStorage.setItem('sidebar', 'open');
                     mainContent.classList.add('lg:pl-80');
@@ -31,7 +31,7 @@
             <!-- Sidebar content here -->
             <div class="divider m-0 my-2 text-sm text-base-content">General</div>
             <li>
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('dashboard') ? 'menu-active' : '' }}"
+                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('dashboard') ? 'bg-base-300' : '' }}"
                     href="{{ route('dashboard') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7z" />
@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('users.index') ? 'menu-active' : '' }}"
+                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('users.index') ? 'bg-base-300' : '' }}"
                     href="{{ route('users.index') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -50,41 +50,11 @@
                 </a>
             </li>
             <div class="divider m-0 my-2 text-sm text-base-content">Data Master</div>
-            <li>
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('habeahan.index') ? 'menu-active' : '' }}"
-                    href="{{ route('habeahan.index') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 1a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 11 5.79V7H7a2 2 0 0 0-2 2v.71A2.5 2.5 0 0 0 3.5 12A2.5 2.5 0 0 0 5 14.29V15H4a2 2 0 0 0-2 2v1.21A2.5 2.5 0 0 0 .5 20.5A2.5 2.5 0 0 0 3 23a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 4 18.21V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 9 23a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2H7v-.71A2.5 2.5 0 0 0 8.5 12A2.5 2.5 0 0 0 7 9.71V9h10v.71A2.5 2.5 0 0 0 15.5 12a2.5 2.5 0 0 0 1.5 2.29V15h-1a2 2 0 0 0-2 2v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 15 23a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-1.5-2.29V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 21 23a2.5 2.5 0 0 0 2.5-2.5a2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2h-1v-.71A2.5 2.5 0 0 0 20.5 12A2.5 2.5 0 0 0 19 9.71V9a2 2 0 0 0-2-2h-4V5.79a2.5 2.5 0 0 0 1.5-2.29A2.5 2.5 0 0 0 12 1m0 1.5a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1M6 11a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m12 0a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1M3 19.5a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1" />
-                    </svg>
-                    <span>Habeahan</span>
-                </a>
-            </li>
-            {{-- <li>
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('users.index') ? 'menu-active' : '' }}"
-                    href="{{ route('users.index') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
-                    </svg>
-                    <span>Bondar</span>
-                </a>
-            </li>
-            <li>
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('users.index') ? 'menu-active' : '' }}"
-                    href="{{ route('users.index') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
-                    </svg>
-                    <span>Gorat</span>
-                </a>
-            </li> --}}
 
 
             <div class="divider m-0 my-2 text-sm text-base-content md:hidden">System</div>
             <li class="md:hidden">
-                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('profile.edit') ? 'menu-active' : '' }}"
+                <a class="flex gap-2 items-center p-3 text-base-content {{ request()->routeIs('profile.edit') ? 'bg-base-300' : '' }}"
                     href="{{ route('profile.edit') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
                         <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
