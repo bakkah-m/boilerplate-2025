@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: laravel_dev
+    working_dir: /app
+    volumes:
+      - ./app:/app/app
+      - ./routes:/app/routes
+      - ./resources:/app/resources
+      - ./public:/app/public
+      - laravel_storage:/app/storage
+      - laravel_uploads:/app/public/assets
+    ports:
+      - "127.0.0.1:8000:8000"       # Laravel
+      - "5173:5173"                  # Vite
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: test_engine
+      DB_USERNAME: spekcif_user
+      DB_PASSWORD: Indonesia!945
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.1
+    container_name: mysql_dev
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: test_engine
+      MYSQL_ROOT_PASSWORD: Indonesia!945
+      MYSQL_USER: spekcif_user
+      MYSQL_PASSWORD: Indonesia!945
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+volumes:
+  mysqldata:
+  laravel_storage:
+  laravel_uploads:
+
+networks:
+  app-network:

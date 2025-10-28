@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TransactionWrapper;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -36,16 +37,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-
+        return TransactionWrapper::run(function () use ($request) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'role' => ['required']
             ]);
-
-            DB::beginTransaction();
 
             User::create([
                 'name' => $request->name,
@@ -53,16 +51,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => $request->role
             ]);
-
-            DB::commit();
-
-            Alert::toast('Berhasil menambahkan data.', 'success');
-            return redirect()->back();
-        }catch(Exception $e){
-            DB::rollBack();
-            Alert::error('Error', 'Messages : ' . $e->getMessage());
-            return redirect()->back();
-        }
+        }, 'Berhasil menambahkan data.');
     }
 
     /**
@@ -86,14 +75,12 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try{
+        return TransactionWrapper::run(function () use ($request, $id) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'password' => ['nullable', 'string', 'min:8', 'confirmed'],
                 'role' => ['required']
             ]);
-
-            DB::beginTransaction();
 
             $user = User::find($id);
             $user->update([
@@ -102,16 +89,7 @@ class UserController extends Controller
                 'password' => $request->password ? Hash::make($request->password) : $user->password,
                 'role' => $request->role
             ]);
-
-            DB::commit();
-
-            Alert::toast('Berhasil mengubah data.', 'success');
-            return redirect()->back();
-        }catch(Exception $e){
-            DB::rollBack();
-            Alert::error('Error', 'Messages : ' . $e->getMessage());
-            return redirect()->back();
-        }
+        }, 'Berhasil mengubah data.');
     }
 
     /**
@@ -119,19 +97,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        try{
-            DB::beginTransaction();
 
+        return TransactionWrapper::run(function () use ($id) {
             User::find($id)->delete();
-
-            DB::commit();
-
-            Alert::toast('Berhasil menghapus data.', 'success');
-            return redirect()->back();
-        }catch(Exception $e){
-            DB::rollBack();
-            Alert::error('Error', 'Messages : ' . $e->getMessage());
-            return redirect()->back();
-        }
+        });
     }
 }

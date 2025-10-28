@@ -10,10 +10,12 @@
                 <legend class="fieldset-legend">Nama<span class="text-red-500">*</span></legend>
                 <input type="text" class="input w-full" name="name" required />
             </fieldset>
+
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Email<span class="text-red-500">*</span></legend>
                 <input type="text" class="input w-full" name="email" required />
             </fieldset>
+
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Role<span class="text-red-500">*</span></legend>
                 @php
@@ -21,6 +23,7 @@
                 @endphp
                 <x-select-search :name="'role'" :value="'id'" :label="['name']" :options="$roles" />
             </fieldset>
+            
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Password<span class="text-red-500">*</span></legend>
                 <input type="password" class="input w-full" name="password" required />

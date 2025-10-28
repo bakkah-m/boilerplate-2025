@@ -1,4 +1,4 @@
-<div class="drawer size-auto fixed z-[499]" id="sidebar-drawer">
+<div class="drawer size-auto fixed z-[499] lg:w-80" id="sidebar-drawer">
 
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
 
@@ -24,7 +24,7 @@
         })
     </script>
 
-    <div class="drawer-side lg:shadow lg:w-80">
+    <div class="drawer-side lg:shadow lg:w-80 overflow-y-scroll">
         <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay lg:hidden"></label>
         <ul
             class="menu bg-base-100 text-base min-h-full pt-24 w-80 p-4 text-neutral-700 font-semibold gap-2 overflow-y-scroll flex flex-col lg:shadow">

@@ -28,7 +28,7 @@
         <div class="flex">
             @include('layouts.sidebar')
             <!-- Page Content -->
-            <div class="w-full transition-all duration-200 ease-in-out" id="main-content">
+            <div class="w-full transition-all duration-200 ease-in-out min-h-screen" id="main-content">
 
                 @isset($header)
                     <header class="bg-base-100 shadow-xs px-4 rounded-none lg:rounded-lg lg:px-0 lg:m-4 lg:mb-0 card flex-row justify-between items-center">

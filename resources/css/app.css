@@ -16,6 +16,7 @@
 }
 @plugin "daisyui" {
     themes: light --default, dark --prefersdark, pastel;
+    exclude: rootscrolllock;
 }
 
 /*
@@ -33,6 +34,30 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentcolor);
+    }
+    
+
+    :root:has(.modal-open, .modal[open], .modal:target, .modal-toggle:checked) {
+        overflow: hidden !important;
+    }
+
+    :root:not(
+            :has(
+                    .modal-open,
+                    .modal[open],
+                    .modal:target,
+                    .modal-toggle:checked
+                )
+        ) {
+        overflow: scroll !important;
+    }
+
+    /* style.css */
+
+    input[type="checkbox"]:checked,
+    input[type="radio"]:checked {
+        background-color: unset !important;
+        border-color: unset !important;
     }
 
     /* style.css */
