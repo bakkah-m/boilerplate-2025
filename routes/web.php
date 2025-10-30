@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     ];
 
     foreach ($resources as $resource) {
-        Route::resource($resource['name'], $resource['controller']);
+        Route::extendedResource($resource['name'], $resource['controller']);
     }
 });
 

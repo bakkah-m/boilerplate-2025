@@ -3,25 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\TransactionWrapper;
+use App\Http\Controllers\Traits\HasGrid;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    protected array $gridColumns = ['id', 'name', 'email', 'role'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = User::orderBy('created_at', 'desc')->get();
-
         return view('users.index', [
-            'data' => $data
+            'columns' => $this->gridColumns,
         ]);
+    }
+
+    public function grid(Request $request)
+    {
+        $query = User::query();
+
+        // Apply filters
+        if ($filters = $request->get('filter')) {
+            foreach ($filters as $field => $value) {
+                if (in_array($field, $this->gridColumns) && $value !== '') {
+                    $query->where($field, 'like', "%{$value}%");
+                }
+            }
+        }
+
+        if ($search = $request->string('search')->trim()) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('role', 'like', "%{$search}%");
+            });
+        }
+
+        // Apply sorting
+        $sort = $request->get('sort', 'id');
+        $dir = $request->get('dir', 'asc');
+        if (in_array($sort, $this->gridColumns)) {
+            $query->orderBy($sort, $dir);
+        }
+
+        // Paginate results
+        $perPage = $request->integer('limit', 10); // items per page
+        $page = $request->integer('page') + 1;   // current page
+
+        Log::info($page . '-'. $perPage);
+        
+
+        $data = $query->paginate($perPage, ['*'], 'page', $page);
+
+
+        return response()->json($data);
     }
 
     /**

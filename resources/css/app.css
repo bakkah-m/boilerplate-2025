@@ -63,37 +63,38 @@
     /* style.css */
 }
 
-.datatable-input {
-    @apply bg-base-200;
+.gridjs-input {
+    @apply !bg-base-200;
     @apply text-base-content;
 }
 
-.datatable-sorter {
+.gridjs-th{
+    @apply !bg-base-200;
     @apply text-base-content;
 }
 
-.datatable-selector {
-    @apply bg-base-200;
+
+.gridjs-td{
+    @apply !bg-base-100;
     @apply text-base-content;
 }
 
-.datatable-selector option {
+
+.gridjs-footer{
+    @apply !bg-base-100;
+    @apply text-base-content;
+    @apply !border-1;
+}
+
+.gridjs-summary{
     @apply text-base-content;
 }
 
-.datatable-table td{
-    @apply text-base-content;
+.gridjs-table{
+    @apply border-1;
 }
 
-.datatable-info {
-    @apply text-base-content;
-}
-
-.datatable-dropdown label {
-    @apply text-base-content;
-}
-
-.datatable-table thead{
-    @apply bg-base-200;
+.gridjs-pages button{
+    @apply !bg-base-100;
     @apply text-base-content;
 }
