@@ -2,12 +2,9 @@
 
 @source "../views";
 
-@source "../../node_modules/flowbite/**/*.js";
-
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 
 @plugin "daisyui";
-@plugin "flowbite/plugin";
 
 @theme {
     --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif,
@@ -68,6 +65,16 @@
     @apply text-base-content;
 }
 
+.gridjs-head{
+    @apply flex;
+    @apply flex-row-reverse;
+    @apply justify-between;
+}
+
+.gridjs-head::after {
+  @apply !hidden;
+}
+
 .gridjs-th{
     @apply !bg-base-200;
     @apply text-base-content;
@@ -75,8 +82,20 @@
 
 
 .gridjs-td{
-    @apply !bg-base-100;
+    @apply !bg-transparent;
     @apply text-base-content;
+}
+
+.gridjs-tr:nth-child(even) {
+    @apply !bg-base-200;
+}
+
+.gridjs-tr:nth-child(odd) {
+    @apply !bg-base-100;
+}
+
+.gridjs-tr{
+    @apply hover:!bg-base-300;
 }
 
 

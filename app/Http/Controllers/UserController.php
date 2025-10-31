@@ -27,44 +27,53 @@ class UserController extends Controller
 
     public function grid(Request $request)
     {
-        $query = User::query();
-
-        // Apply filters
-        if ($filters = $request->get('filter')) {
-            foreach ($filters as $field => $value) {
-                if (in_array($field, $this->gridColumns) && $value !== '') {
-                    $query->where($field, 'like', "%{$value}%");
-                }
-            }
-        }
-
-        if ($search = $request->string('search')->trim()) {
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%")
-                    ->orWhere('role', 'like', "%{$search}%");
-            });
-        }
-
-        // Apply sorting
+        $perPage = $request->integer('limit', 10);
+        $page = $request->integer('page', 0) + 1;
+        $search = $request->string('search')->trim();
         $sort = $request->get('sort', 'id');
         $dir = $request->get('dir', 'asc');
-        if (in_array($sort, $this->gridColumns)) {
-            $query->orderBy($sort, $dir);
-        }
+        $filters = $request->get('filter', []);
 
-        // Paginate results
-        $perPage = $request->integer('limit', 10); // items per page
-        $page = $request->integer('page') + 1;   // current page
+        Log::info($request->all());
 
-        Log::info($page . '-'. $perPage);
-        
+        $query = User::query()
+            // 🔍 Filter berdasarkan kolom tertentu
+            ->when($filters, function ($q) use ($filters) {
+                foreach ($filters as $field => $value) {
+                    if (!empty($value) && in_array($field, $this->gridColumns)) {
+                        $q->where($field, 'like', "%{$value}%");
+                    }
+                }
+            })
+            // 🔎 Pencarian global
+            ->when($search, function ($q, $search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('role', 'like', "%{$search}%");
+                });
+            })
+            // ↕️ Sorting
+            ->when(in_array($sort, $this->gridColumns), function ($q) use ($sort, $dir) {
+                $q->orderBy($sort, $dir);
+            }, function ($q) {
+                $q->orderBy('id', 'asc');
+            });
 
+        // 📄 Pagination
         $data = $query->paginate($perPage, ['*'], 'page', $page);
 
+        // 🔢 Tambah nomor urut otomatis
+        $start = ($data->currentPage() - 1) * $data->perPage() + 1;
+        $data->getCollection()->transform(function ($item, $index) use ($start) {
+            $item->number = $start + $index;
+            return $item;
+        });
 
         return response()->json($data);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -107,9 +116,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $id)
+    public function edit(string $id)
     {
-        //
+        $data = User::find($id);
+        return view('users.edit', [
+            'data' => $data
+        ]);
     }
 
     /**

@@ -4,7 +4,7 @@
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <h3 class="text-lg font-bold mb-4">Tambah Data</h3>
-        <form class="space-y-4" action="{{ route('users.store') }}" method="POST" id="createForm">
+        <form class="space-y-4" action="{{ route('users.store') }}" method="POST" id="createForm" onsubmit="this.querySelector('button[type=submit]').disabled = true; this.querySelector('button[type=submit]').innerText = 'Processing...';">
             @csrf
             <fieldset class="fieldset">
                 <legend class="fieldset-legend">Nama<span class="text-red-500">*</span></legend>
